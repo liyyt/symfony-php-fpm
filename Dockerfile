@@ -32,6 +32,11 @@ RUN set -xe \
     && docker-php-ext-enable --ini-name 10-apcu.ini apcu \
     && docker-php-ext-enable --ini-name 10-redis.ini redis \
     && apk del .build-deps \
+    && curl -SLO "https://getcomposer.org/installer" \
+    && curl -fsSL "https://getcomposer.org/installer" -o /tmp/installer \
+    && php /tmp/installer \
+    && mv /var/www/html/composer.phar /usr/local/bin/composer \
+    && rm /tmp/installer \
     && mkdir -p /var/www/html/var/cache \
     && mkdir -p /var/www/html/var/logs \
     && mkdir -p /var/www/html/var/sessions \
